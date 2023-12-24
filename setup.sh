@@ -6,7 +6,7 @@ else
 fi
 
 GITPAT=$1
-RESOURCE_GROUP=bogice1-rg
+RESOURCE_GROUP=bogice-rg1
 apiappname=bogice-apim
 aspName=bogice-asp
 apikeyvault=bogice-apim-kv
@@ -33,6 +33,7 @@ printf "\Set policy - 3/3 ... (4/5)\n\n"
 az keyvault set-policy -n $apikeyvault --secret-permissions get --upn $(az ad signed-in-user show --query userPrincipalName -o tsv)
 
 printf "\nSetting the account-level deployment credentials ...(5/5)\n\n"
+GITPAT=$(az keyvault secret show --vault-name $apikeyvault --name $apiSecretName --query value -o tsv)
 az webapp deployment source config --name $apiappname --resource-group $RESOURCE_GROUP --repo-url $gitUrl --branch master --git-token $GITPAT --manual-integration
 
 # Create Web App with GitHub deploy
