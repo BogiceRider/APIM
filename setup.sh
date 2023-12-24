@@ -22,7 +22,7 @@ printf "\nCreating Resource group ... (1/5)\n\n"
 az group create --name $RESOURCE_GROUP --location centralus
 
 printf "\nCreating App Service plan in Basic tier ... (2/5)\n\n"
-az appservice plan create --name $aspName --resource-group $RESOURCE_GROUP --sku basic --location centralus
+az appservice plan create --name $aspName --resource-group $RESOURCE_GROUP --sku B1 --location centralus
 
 printf "\nCreating API App ... (3/5)\n\n"
 az webapp create --name $apiappname --resource-group $RESOURCE_GROUP --plan $aspName
@@ -37,7 +37,7 @@ printf "\Set policy - 3/3 ... (4/5)\n\n"
 az keyvault set-policy -n $apikeyvault --secret-permissions get --upn $upn
 
 printf "\nSetting the account-level deployment credentials ...(5/5)\n\n"
-az webapp deployment source config --name $apiappname --resource-group $RESOURCE_GROUP --repo-url $gitUrl --branch master --git-token $GITPAT --mamual-integration
+az webapp deployment source config --name $apiappname --resource-group $RESOURCE_GROUP --repo-url $gitUrl --branch master --git-token $GITPAT --manual-integration
 
 # Create Web App with GitHub deploy
 
