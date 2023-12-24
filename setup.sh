@@ -7,7 +7,7 @@ fi
 
 GITPAT=$1
 RESOURCE_GROUP=bogice-rg1
-apiappname=bogice-apim
+apiappname=bogice-api
 aspName=bogice-asp
 apikeyvault=bogice-apim-kv
 apiSecretName=Git-PAT
