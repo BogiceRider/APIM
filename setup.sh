@@ -1,4 +1,13 @@
 #!/bin/bash
+
+#!/bin/bash
+
+if [ $# -eq 1 ]; then
+  echo "Setting up infrastructure for API Management"
+else
+  echo "Please provide exactly one argument."
+fi
+
 GITPAT=$1
 RESOURCE_GROUP=bogice1-rg
 apiappname=bogice-apim
