@@ -1,7 +1,4 @@
 #!/bin/bash
-
-#!/bin/bash
-
 if [ $# -eq 1 ]; then
   echo "Setting up infrastructure for API Management"
 else
@@ -14,7 +11,6 @@ apiappname=bogice-apim
 aspName=bogice-asp
 apikeyvault=bogice-apim-kv
 apiSecretName=Git-PAT
-upn=$(az ad signed-in-user show --query userPrincipalName -o tsv)
 gitUrl=https://github.com/BogiceRider/APIM.git
 
 
@@ -34,7 +30,7 @@ printf "\Set secret- 2/3 ... (4/5)\n\n"
 az keyvault secret set --vault-name $apikeyvault --name $apiSecretName --value $GITPAT
 
 printf "\Set policy - 3/3 ... (4/5)\n\n"
-az keyvault set-policy -n $apikeyvault --secret-permissions get --upn $upn
+az keyvault set-policy -n $apikeyvault --secret-permissions get --upn $(az ad signed-in-user show --query userPrincipalName -o tsv)
 
 printf "\nSetting the account-level deployment credentials ...(5/5)\n\n"
 az webapp deployment source config --name $apiappname --resource-group $RESOURCE_GROUP --repo-url $gitUrl --branch master --git-token $GITPAT --manual-integration
