@@ -21,7 +21,7 @@ printf "\nCreating API App ... (3/7)\n\n"
 
 az webapp create --name $apiappname --resource-group $RESOURCE_GROUP --plan $apiappname
 
-printf "\Set up keyvault for Git PAT - 1/3 ... (4/7)\n\n"
+printf "\Create keyvault for Git PAT - 1/3 ... (4/7)\n\n"
 
 az keyvault create -n $apikeyvault -g $RESOURCE_GROUP -l centralus
 
